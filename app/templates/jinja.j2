@@ -1,0 +1,17 @@
+{% macro returnapi() %}
+from fastapi import APIRouter
+r = APIRouter()
+{% for k,v in api.items()|sort %}
+{% if v.get('response_model') %}
+@r.{{v.get('name')}}("{{k}}", {{v.get('response_model')}})
+{% else %}
+@r.{{v.get('name')}}("{{k}}")
+{% endif %}
+def {{v.get('functionName')}}({% if v.get('parameter')%} {{v.get('parameter')}} {% else %} {% endif %}):
+    {{v.get('functionContent')}}
+    return {{v.get('returnValue')}}
+{% endfor %}
+    return r
+{% endmacro %}
+{{ returnapi() }}
+
