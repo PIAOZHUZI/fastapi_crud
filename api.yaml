@@ -1,18 +1,19 @@
-/tttt :
-  name: get
-  functionName: testfunc
-  returnValue: "helloWorld"
-#/pet/findByTags:
-#  name : post
-#  functionName: testfunc2
-#  desc: hello World
-/items:
+/tttt : # path
+  name: get # path operation
+  functionName: testfunc # function name
+  returnValue: '"hello_world"' # return value
+# @app.get("/items/", response_model=List[schemas.Item])
+# def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+#     items = crud.get_items(db, skip=skip, limit=limit)
+#     return items
+/items/:
     name: get
     functionName: read_items
     response_model : response_model=List[schemas.Item]
     returnValue : items
-    functionContent :  items = crud.get_items(db, skip=skip, limit=limit)
-    parameter : 'skip: int = 0, limit: int = 100, db: Session = Depends(get_db)'
+    functionContent :  items = crud.get_items(db, skip=skip, limit=limit) # content in function
+    parameter : >  # function for parameter  
+      skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 /{item_id}:
     name: put
     functionName: update_item
@@ -23,10 +24,7 @@
               status_code=403, detail="You can only update the item: plumbus"
           )'
     parameter: 'item_id: str'
-# @app.get("/items/", response_model=List[schemas.Item])
-# def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-#     items = crud.get_items(db, skip=skip, limit=limit)
-#     return items
+
 
 #@router.put(
 #    "/{item_id}",

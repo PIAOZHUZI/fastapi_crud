@@ -1,4 +1,5 @@
 {% macro returnapi() %}
+from main import get_db
 from fastapi import APIRouter
 r = APIRouter()
 {% for k,v in api.items()|sort %}

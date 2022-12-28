@@ -6,12 +6,14 @@ from sqlalchemy.orm import Session
 
 import crud, models, schemas
 import sqlitedatabase
-from memo import router
+
+from routers import router_yaml
 
 models.Base.metadata.create_all(bind=sqlitedatabase.engine)
 
 app = FastAPI()
 r = APIRouter()
+
 
 # Dependency
 def get_db():
@@ -56,9 +58,9 @@ def create_item_for_user(
 #     items = crud.get_items(db, skip=skip, limit=limit)
 #     return items
 
-exec(router.rend(template="jinja.j2"))
+exec(router_yaml.rend(template="jinja.j2"))
 r
-app.include_router(r)
+app.include_router(r)  # yaml로 만든 router
 
 if __name__ == '__main__':
     uvicorn.run(app, port=9090)
