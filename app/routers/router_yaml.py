@@ -14,8 +14,6 @@ def rend(template):
     return jinja_template.render(api=routers)
 
 
-
 @memo_router.get("/test")
 async def test():
     return {"say": "hello"}
-

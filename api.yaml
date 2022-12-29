@@ -1,4 +1,4 @@
-/tttt : # path
+/helloWorld : # path
   name: get # path operation
   functionName: testfunc # function name
   returnValue: '"hello_world"' # return value

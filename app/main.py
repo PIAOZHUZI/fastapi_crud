@@ -61,6 +61,6 @@ def create_item_for_user(
 exec(router_yaml.rend(template="jinja.j2"))
 r
 app.include_router(r)  # yaml로 만든 router
-
+app.include_router(router_yaml.memo_router)
 if __name__ == '__main__':
     uvicorn.run(app, port=9090)
